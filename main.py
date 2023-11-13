@@ -1,12 +1,23 @@
 # This is a sample Python script.
+import chromadb
+from chromadb import Settings
+
 
 # Press Mayús+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    chroma_client = chromadb.Client(Settings(persist_directory="persistent.db"))
+    #client = chromadb.PersistentClient(path="persistent.db")
+    cole = chroma_client.list_collections()
+    print(client.list_collections())
+    collection = client.get_collection(name="movies-overviews")
+    result = collection.query(
+        query_texts=["anillo"],
+        n_results=2
+    )
+    print(result)
 
 
 # Press the green button in the gutter to run the script.

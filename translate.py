@@ -1,6 +1,7 @@
 import time
 import pandas as pd
 from googletrans import Translator
+from local_setting import archivo_origen, columna_a_traducir, columnas_a_mover, archivo_destino
 
 translator = Translator()
 INDEX = 0
@@ -16,12 +17,6 @@ def traducir_a_espanol(texto):
     print('\rTraduciendo al español [%d%%]'%progres, end="")
     traduccion = translator.translate(texto, dest='es')
     return traduccion.text
-
-
-archivo_origen = 'imdb_top_1000.csv'
-archivo_destino = 'imdb_top_1000_es.csv'
-columna_a_traducir = 'Overview'
-columnas_a_mover = ['Overview', 'Series_Title', 'Released_Year']
 
 df_origen = pd.read_csv(archivo_origen)
 df_origen[columna_a_traducir] = df_origen[columna_a_traducir].apply(traducir_a_espanol)
