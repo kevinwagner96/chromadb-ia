@@ -1,27 +1,46 @@
-# This is a sample Python script.
-import chromadb
-from chromadb import Settings
+from chroma import ChromaMoviesDB
+from prettytable import PrettyTable
+
+def print_table(data):
+    field_names = ["ID", "Distancia", "Metadatos", "Overview"]
+    # Agregar datos a la tabla
+    print("Result:")
+    for i in range(len(data['ids'][0])):
+        id_value = data['ids'][0][i]
+        distance_value = data['distances'][0][i]
+        year = data['metadatas'][0][i]['year']
+        name = data['metadatas'][0][i]['name']
+        document_value = data['documents'][0][i]
+        print("ID: {} | {} | Year: {} | Distance: {}\n{}".format(id_value,name,year,distance_value,document_value))
 
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+def ingresar_texto():
+    texto = input("Ingresa el texto: ")
+    return texto
 
 
-def print_hi(name):
-    chroma_client = chromadb.Client(Settings(persist_directory="persistent.db"))
-    #client = chromadb.PersistentClient(path="persistent.db")
-    cole = chroma_client.list_collections()
-    print(client.list_collections())
-    collection = client.get_collection(name="movies-overviews")
-    result = collection.query(
-        query_texts=["anillo"],
-        n_results=2
-    )
-    print(result)
+def menu():
+    db = ChromaMoviesDB()
+    while True:
+        print("\nMenú:")
+        print("1. Busqueda contextual de una pelicula")
+        print("2. Cantidad de elementos")
+        print("3. Salir")
+
+        opcion = input("Selecciona una opción (1/2/3): ")
+
+        if opcion == '1':
+            result = db.query(ingresar_texto(), 2)
+            print_table(result)
+        elif opcion == '2':
+            print(db.elements())
+        elif opcion == '3':
+            print("Saliendo del programa. ¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Por favor, ingresa 1, 2 o 3.")
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    menu()
