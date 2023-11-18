@@ -1,6 +1,8 @@
+<img src="https://github.com/kevinwagner96/chromadb-ia-tasd/assets/23692189/db8f5ef1-18c0-4974-96db-3f9f1358a258" align="right" width="240"/>
+
 # TASD ChromaDB Demo
 
-Este repositorio contiene una demostración del uso de ChromaDB para la materia "TECNOLOGIAS APLICADAS A SOLUCIONES DE DATOS" en la Universidad Tecnológica Nacional (UTN).
+Este repositorio contiene una demostración del uso de ChromaDB para la materia <b>"Tecnologias aplicadas a soluciones de datos"</b> en la Universidad Tecnológica Nacional (UTN).
 
 ## Descripción:
 
